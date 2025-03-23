@@ -1,0 +1,208 @@
+.servicesHero {
+  padding: 8rem 0 5rem;
+  background-color: var(--secondary-color);
+  color: var(--light-text);
+  text-align: center;
+}
+
+.servicesHero h1 {
+  color: var(--light-text);
+  margin-bottom: 1rem;
+}
+
+.servicesHero p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  opacity: 0.9;
+}
+
+.servicesIntro {
+  padding: 5rem 0;
+  background-color: #ffffff;
+}
+
+.introContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introContent h2 {
+  margin-bottom: 1.5rem;
+  color: var(--secondary-color);
+}
+
+.introContent p {
+  font-size: 1.1rem;
+  color: var(--gray-text);
+  line-height: 1.8;
+}
+
+.mainServices {
+  padding: 5rem 0;
+  background-color: var(--light-bg);
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--secondary-color);
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.processSection {
+  padding: 5rem 0;
+  background-color: #ffffff;
+}
+
+.processSteps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.processStep {
+  flex: 1 0 200px;
+  max-width: 300px;
+  text-align: center;
+  position: relative;
+}
+
+.stepNumber {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto 1.5rem;
+}
+
+.processStep h3 {
+  margin-bottom: 1rem;
+  color: var(--secondary-color);
+}
+
+.processStep p {
+  color: var(--gray-text);
+  line-height: 1.6;
+}
+
+.testimonials {
+  padding: 5rem 0;
+  background-color: var(--light-bg);
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial {
+  background-color: #ffffff;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.testimonialContent {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.testimonialContent:before {
+  content: "\201C";
+  font-size: 4rem;
+  color: var(--primary-color);
+  opacity: 0.2;
+  position: absolute;
+  top: -1rem;
+  left: -0.5rem;
+  line-height: 1;
+}
+
+.testimonialContent p {
+  position: relative;
+  z-index: 1;
+  color: var(--gray-text);
+  line-height: 1.7;
+}
+
+.testimonialAuthor h4 {
+  margin-bottom: 0.25rem;
+  color: var(--secondary-color);
+}
+
+.testimonialAuthor p {
+  color: var(--gray-text);
+  font-size: 0.9rem;
+}
+
+.cta {
+  padding: 5rem 0;
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.ctaContent h2 {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.ctaContent p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .servicesHero {
+    padding: 6rem 0 3rem;
+  }
+  
+  .servicesHero p {
+    font-size: 1.1rem;
+  }
+  
+  .servicesIntro, .mainServices, .processSection, .testimonials, .cta {
+    padding: 3rem 0;
+  }
+  
+  .introContent p {
+    font-size: 1rem;
+  }
+  
+  .sectionTitle {
+    margin-bottom: 2rem;
+  }
+  
+  .ctaContent p {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .servicesGrid, .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
+}
