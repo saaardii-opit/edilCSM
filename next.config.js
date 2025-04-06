@@ -5,6 +5,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  // Required for GitHub Pages
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/edilcsm' : '',
+  basePath: process.env.NODE_ENV === 'production' ? '/edilcsm' : '',
   images: {
     domains: [],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
@@ -17,11 +20,6 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ['@heroicons/react'],
-    serverActions: {
-      bodySizeLimit: '2mb',
-      allowedOrigins: ['localhost:3000']
-    },
-    webpackBuildWorker: true,
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
@@ -32,14 +30,8 @@ const nextConfig = {
   httpAgentOptions: {
     keepAlive: true,
   },
-  onDemandEntries: {
-    maxInactiveAge: 60 * 60 * 1000,
-    pagesBufferLength: 5,
-  },
-  productionBrowserSourceMaps: false,
-  output: 'export',
+  // Optimization configs
   webpack: (config, { dev, isServer }) => {
-    // Production optimizations
     if (!dev && !isServer) {
       config.optimization.splitChunks.cacheGroups = {
         ...config.optimization.splitChunks.cacheGroups,
@@ -51,7 +43,6 @@ const nextConfig = {
         },
       };
     }
-
     return config;
   },
 };
