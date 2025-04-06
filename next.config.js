@@ -37,6 +37,7 @@ const nextConfig = {
     pagesBufferLength: 5,
   },
   productionBrowserSourceMaps: false,
+  output: 'export',
   webpack: (config, { dev, isServer }) => {
     // Production optimizations
     if (!dev && !isServer) {
@@ -48,14 +49,6 @@ const nextConfig = {
           minChunks: 2,
           priority: 10,
         },
-      };
-    }
-
-    // Enable HMR in development mode
-    if (dev && !isServer) {
-      config.devServer = {
-        ...config.devServer,
-        hot: true,
       };
     }
 
