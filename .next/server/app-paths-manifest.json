@@ -1,0 +1,13 @@
+{
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/errors/route": "app/api/errors/route.js",
+  "/api/metrics/route": "app/api/metrics/route.js",
+  "/sitemap.xml/route": "app/sitemap.xml/route.js",
+  "/robots.txt/route": "app/robots.txt/route.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/lavori-svolti/page": "app/lavori-svolti/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/page": "app/page.js",
+  "/services/page": "app/services/page.js",
+  "/offline/page": "app/offline/page.js"
+}
