@@ -3,192 +3,211 @@
 import { useState } from 'react';
 import styles from '../styles/ContactForm.module.css';
 
-const ContactForm = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  });
-  
-  const [errors, setErrors] = useState({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
-  
+const INITIAL_STATE = {
+  name: '',
+  email: '',
+  phone: '',
+  subject: '',
+  message: '',
+};
+
+const INITIAL_ERRORS = {
+  name: '',
+  email: '',
+  phone: '',
+  message: '',
+};
+
+export default function ContactForm() {
+  const [formData, setFormData] = useState(INITIAL_STATE);
+  const [errors, setErrors] = useState(INITIAL_ERRORS);
+  const [status, setStatus] = useState('idle');
+  const [notification, setNotification] = useState(null);
+
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
     }
-    
-    if (formData.phone && !/^[0-9()\-\s+]+$/.test(formData.phone)) {
-      newErrors.phone = 'Phone number is invalid';
-    }
-    
+
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
     }
-    
+
+    if (formData.phone && !/^\+?[\d\s-]{10,}$/.test(formData.phone)) {
+      newErrors.phone = 'Invalid phone number';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors({ ...errors, [name]: null });
-    }
+
+  const showNotification = (message, type = 'success') => {
+    setNotification({ message, type });
+    setTimeout(() => setNotification(null), 5000);
   };
-  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
+      showNotification('Please correct the errors in the form', 'error');
       return;
     }
-    
-    setIsSubmitting(true);
-    
+
+    setStatus('submitting');
+
     try {
-      // Simulate form submission with a timeout
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // In a real application, you would send the form data to your server here
-      console.log('Form submitted:', formData);
-      
-      // Reset form and show success message
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        subject: '',
-        message: '',
-      });
-      
-      setSubmitStatus({
-        type: 'success',
-        message: 'Thank you for your message! We will get back to you soon.',
-      });
-      
-      // Clear success message after 5 seconds
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, 5000);
-      
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      setFormData(INITIAL_STATE);
+      setStatus('success');
+      showNotification('Thank you for your message. We will get back to you soon!');
     } catch (error) {
-      console.error('Error submitting form:', error);
-      
-      setSubmitStatus({
-        type: 'error',
-        message: 'There was an error sending your message. Please try again later.',
-      });
-    } finally {
-      setIsSubmitting(false);
+      setStatus('error');
+      showNotification('An error occurred. Please try again later.', 'error');
     }
   };
-  
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+  };
+
   return (
-    <form className={styles.contactForm} onSubmit={handleSubmit}>
-      {submitStatus && (
-        <div className={`${styles.statusMessage} ${styles[submitStatus.type]}`}>
-          {submitStatus.message}
-        </div>
-      )}
-      
-      <div className={styles.formRow}>
-        <div className={styles.formGroup}>
-          <label htmlFor="name">Full Name *</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={errors.name ? styles.errorInput : ''}
-          />
-          {errors.name && <span className={styles.errorMessage}>{errors.name}</span>}
-        </div>
-        
-        <div className={styles.formGroup}>
-          <label htmlFor="email">Email Address *</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className={errors.email ? styles.errorInput : ''}
-          />
-          {errors.email && <span className={styles.errorMessage}>{errors.email}</span>}
-        </div>
-      </div>
-      
-      <div className={styles.formRow}>
-        <div className={styles.formGroup}>
-          <label htmlFor="phone">Phone Number</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            className={errors.phone ? styles.errorInput : ''}
-          />
-          {errors.phone && <span className={styles.errorMessage}>{errors.phone}</span>}
-        </div>
-        
-        <div className={styles.formGroup}>
-          <label htmlFor="subject">Subject</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            value={formData.subject}
-            onChange={handleChange}
-          />
-        </div>
-      </div>
-      
+    <form onSubmit={handleSubmit} className={styles.form} noValidate>
       <div className={styles.formGroup}>
-        <label htmlFor="message">Message *</label>
+        <label htmlFor="name" className={styles.label}>
+          Name <span className={styles.required}>*</span>
+        </label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          className={`${styles.input} ${errors.name ? styles.error : ''}`}
+          aria-invalid={errors.name ? 'true' : 'false'}
+          aria-describedby={errors.name ? 'name-error' : undefined}
+          disabled={status === 'submitting'}
+        />
+        {errors.name && (
+          <span id="name-error" className={styles.errorMessage} role="alert">
+            {errors.name}
+          </span>
+        )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="email" className={styles.label}>
+          Email <span className={styles.required}>*</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          className={`${styles.input} ${errors.email ? styles.error : ''}`}
+          aria-invalid={errors.email ? 'true' : 'false'}
+          aria-describedby={errors.email ? 'email-error' : undefined}
+          disabled={status === 'submitting'}
+        />
+        {errors.email && (
+          <span id="email-error" className={styles.errorMessage} role="alert">
+            {errors.email}
+          </span>
+        )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="phone" className={styles.label}>
+          Phone
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          className={`${styles.input} ${errors.phone ? styles.error : ''}`}
+          aria-invalid={errors.phone ? 'true' : 'false'}
+          aria-describedby={errors.phone ? 'phone-error' : undefined}
+          disabled={status === 'submitting'}
+        />
+        {errors.phone && (
+          <span id="phone-error" className={styles.errorMessage} role="alert">
+            {errors.phone}
+          </span>
+        )}
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="subject" className={styles.label}>
+          Subject
+        </label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          value={formData.subject}
+          onChange={handleChange}
+          className={styles.input}
+          disabled={status === 'submitting'}
+        />
+      </div>
+
+      <div className={styles.formGroup}>
+        <label htmlFor="message" className={styles.label}>
+          Message <span className={styles.required}>*</span>
+        </label>
         <textarea
           id="message"
           name="message"
-          rows="5"
           value={formData.message}
           onChange={handleChange}
-          className={errors.message ? styles.errorInput : ''}
-        ></textarea>
-        {errors.message && <span className={styles.errorMessage}>{errors.message}</span>}
+          className={`${styles.textarea} ${errors.message ? styles.error : ''}`}
+          rows={5}
+          aria-invalid={errors.message ? 'true' : 'false'}
+          aria-describedby={errors.message ? 'message-error' : undefined}
+          disabled={status === 'submitting'}
+        />
+        {errors.message && (
+          <span id="message-error" className={styles.errorMessage} role="alert">
+            {errors.message}
+          </span>
+        )}
       </div>
-      
-      <div className={styles.formActions}>
-        <button 
-          type="submit" 
-          className={`${styles.submitButton} ${isSubmitting ? styles.submitting : ''}`}
-          disabled={isSubmitting}
+
+      <button
+        type="submit"
+        className={`${styles.submitButton} btn`}
+        disabled={status === 'submitting'}
+      >
+        {status === 'submitting' ? 'Submitting...' : 'Send Message'}
+      </button>
+
+      {notification && (
+        <div
+          className={`${styles.notification} ${styles[notification.type]}`}
+          role="alert"
         >
-          {isSubmitting ? (
-            <>
-              <span className={styles.spinner}></span>
-              Sending...
-            </>
-          ) : 'Send Message'}
-        </button>
-      </div>
+          {notification.message}
+        </div>
+      )}
     </form>
   );
-};
-
-export default ContactForm;
+}

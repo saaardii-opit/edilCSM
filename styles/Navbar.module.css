@@ -136,7 +136,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .header {
     height: 70px;
   }

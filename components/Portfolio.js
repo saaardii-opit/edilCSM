@@ -16,7 +16,7 @@ const Portfolio = () => {
     setFilter(newFilter);
   };
   
-  const categories = ['all', ...new Set(projects.map(project => project.category.toLowerCase()))];
+  const categories = ['tutti', ...new Set(projects.map(project => project.category.toLowerCase()))];
   
   return (
     <div className={styles.portfolio}>
@@ -39,7 +39,7 @@ const Portfolio = () => {
           ))
         ) : (
           <div className={styles.noProjects}>
-            <p>No projects found in this category.</p>
+            <p>Nessun progetto trovato in questa categoria.</p>
           </div>
         )}
       </div>

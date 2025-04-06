@@ -1,0 +1,106 @@
+.offlineContainer {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background: var(--background);
+}
+
+.offlineContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.offlineIcon {
+  margin-bottom: 2rem;
+  color: var(--secondary-color);
+  animation: pulse 2s infinite;
+}
+
+.offlineContent h1 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.offlineContent p {
+  color: var(--gray-text);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+.lastOnline {
+  font-size: 0.9rem !important;
+  opacity: 0.8;
+  margin-bottom: 1.5rem !important;
+}
+
+.retryButton {
+  min-width: 150px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.retryButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cachedContent {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.cachedContent h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.cachedPages {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.cachedPages li a {
+  display: block;
+  padding: 1rem;
+  background: var(--background-alt);
+  border-radius: var(--border-radius);
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.cachedPages li a:hover,
+.cachedPages li a:focus {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .offlineContent h1 {
+    font-size: 1.75rem;
+  }
+
+  .offlineContent p {
+    font-size: 1rem;
+  }
+
+  .cachedPages {
+    grid-template-columns: 1fr;
+  }
+}

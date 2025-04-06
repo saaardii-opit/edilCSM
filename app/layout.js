@@ -1,6 +1,5 @@
 import './globals.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import ClientLayout from '../components/ClientLayout';
 
 export const metadata = {
   title: {
@@ -29,15 +28,32 @@ export const metadata = {
       'max-video-preview': -1,
     },
   },
+  viewport: {
+    themeColor: '#e65100',
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="preconnect"
+          href="https://fonts.googleapis.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/hero-bg-placeholder.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+        <meta name="theme-color" content="#e65100" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+      </head>
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

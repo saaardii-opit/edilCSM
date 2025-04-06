@@ -1,3 +1,5 @@
+@import '../lib/breakpoints.css';
+
 .hero {
   position: relative;
   height: 100vh;
@@ -63,34 +65,29 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 576px) {
   .hero {
     min-height: 500px;
   }
-  
   .title {
     font-size: 2.5rem;
   }
-  
   .subtitle {
     font-size: 1.1rem;
   }
-  
   .ctaButton {
     font-size: 1rem;
     padding: 0.8rem 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
+@media (min-width: 480px) {
   .hero {
     min-height: 450px;
   }
-  
   .title {
     font-size: 2rem;
   }
-  
   .heroContent {
     padding: 1.5rem;
   }

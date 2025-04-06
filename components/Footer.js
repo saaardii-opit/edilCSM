@@ -3,7 +3,7 @@ import styles from '../styles/Footer.module.css';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <footer className={styles.footer}>
       <div className="container">
@@ -18,43 +18,43 @@ const Footer = () => {
                 <span>Edil CSM</span>
               </div>
             </Link>
-            <p>Quality construction and restoration services for residential and commercial projects.</p>
+            <p>Servizi di costruzione e restauro di qualità per progetti residenziali e commerciali.</p>
           </div>
-          
+
           <div className={styles.footerLinks}>
             <div className={styles.linksColumn}>
-              <h3>Navigation</h3>
+              <h3>Navigazione</h3>
               <ul>
                 <li><Link href="/">Home</Link></li>
-                <li><Link href="/services">Services</Link></li>
+                <li><Link href="/services">Servizi</Link></li>
                 <li><Link href="/#portfolio">Portfolio</Link></li>
-                <li><Link href="/contact">Contact</Link></li>
+                <li><Link href="/contact">Contatti</Link></li>
               </ul>
             </div>
-            
+
             <div className={styles.linksColumn}>
-              <h3>Services</h3>
+              <h3>Servizi</h3>
               <ul>
-                <li><Link href="/services">New Construction</Link></li>
-                <li><Link href="/services">Renovation</Link></li>
-                <li><Link href="/services">Historical Restoration</Link></li>
+                <li><Link href="/services">Nuove Costruzioni</Link></li>
+                <li><Link href="/services">Ristrutturazioni</Link></li>
+                <li><Link href="/services">Restauro Storico</Link></li>
               </ul>
             </div>
-            
+
             <div className={styles.linksColumn}>
-              <h3>Contact</h3>
+              <h3>Contatti</h3>
               <ul>
-                <li>123 Construction Ave</li>
-                <li>Building City, BC 12345</li>
-                <li>(123) 456-7890</li>
+                <li>Via Ambrogio Confalonieri 46</li>
+                <li>Brugherio (MB), 20861</li>
+                <li>+39 3396882872</li>
                 <li>info@edilcsm.com</li>
               </ul>
             </div>
           </div>
         </div>
-        
+
         <div className={styles.footerBottom}>
-          <p>&copy; {currentYear} Edil CSM. All rights reserved.</p>
+          <p>&copy; {currentYear} Edil CSM. Tutti i diritti riservati.</p>
           <div className={styles.socialLinks}>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -3,6 +3,7 @@
   background-color: var(--secondary-color);
   color: var(--light-text);
   text-align: center;
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
 }
 
 .contactHero h1 {
@@ -24,18 +25,20 @@
 
 .contactGrid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
 }
 
 .contactInfo h2 {
+  font-size: 1.8rem;
   margin-bottom: 1.5rem;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .contactInfo p {
+  font-size: 1.1rem;
   color: var(--gray-text);
-  line-height: 1.6;
+  line-height: 1.8;
   margin-bottom: 2rem;
 }
 
@@ -77,9 +80,41 @@
   color: var(--secondary-color);
 }
 
+.formSkeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.inputPlaceholder {
+  height: 48px;
+  background: var(--skeleton-color);
+  border-radius: var(--border-radius);
+}
+
+.textareaPlaceholder {
+  height: 150px;
+  background: var(--skeleton-color);
+  border-radius: var(--border-radius);
+}
+
+.buttonPlaceholder {
+  height: 48px;
+  width: 120px;
+  background: var(--skeleton-color);
+  border-radius: var(--border-radius);
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
+
 .mapSection {
-  padding: 5rem 0;
-  background-color: #ffffff;
+  padding: 4rem 0;
+  background-color: var(--light-bg);
 }
 
 .mapSection h2 {
@@ -89,14 +124,14 @@
 
 .mapPlaceholder {
   width: 100%;
-  height: 400px;
+  height: 350px;
   background-color: var(--light-bg);
   border-radius: var(--border-radius);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--gray-text);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .mapContent {
